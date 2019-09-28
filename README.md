@@ -3,10 +3,9 @@
 ## Pre-requisite
 
 - Nodejs: version 10.x
-- Serverless.com framework
-- AWS Account
-
-## Local Install Setup
+- AWS Account and CLI setup
+- Serverless Framework For backend
+- S3 Bucket for Frontent hosting
 
 ### Nodejs
 
@@ -39,7 +38,7 @@ This command line will create a credentials file at :
 
 This file will be used by the serverless framework when deploying to AWS.
 
-### Setup Serverless Framework
+### Backend: Setup Serverless Framework
 
 - Install serverles globally
 
@@ -48,3 +47,35 @@ npm install -g serverless
 ```
 
 More Info: <https://serverless.com/framework/docs/getting-started/>
+
+### Frontend Hosting using S3:
+
+- Current project is using this S3 bucket: http://calculator-project.s3-website-ap-southeast-1.amazonaws.com/
+
+- To install your own S3 Bucket:
+https://serverless-stack.com/chapters/create-an-s3-bucket.html
+
+## Deployment:
+
+### Manual deployment for Backend Serverless Framework:
+
+- Pre-requisite: `Setup your AWS CLI and credential` from the AWS Setup
+- cd `backend`
+- Run serverless deployment cli: 
+
+```bash
+serverless deploy -v
+```
+
+### Manual deployment for Frontend React:
+
+- Pre-requisite: `Setup your AWS CLI and credential` from the AWS Setup
+- cd `frontend`
+- npm run build
+- Run AWS to S3 Bucket
+
+```bash
+aws s3 sync build/ s3://calculator-project
+```
+
+Note: `calculator-project` should be you bucket name
